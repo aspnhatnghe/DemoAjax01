@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+<button type="button" id="btnRandom">Lấy số ngẫu nhiên</button>
+<div id="sonn" class="text-danger"></div>
+<h2 id="myClock" class="text-danger"></h2>
+
+@section Scripts{
+    <script>
+        $(function () {
+
+            function layGio() {
+                $.ajax({
+                    url: "/Ajax/ServerTime",
+                    success: function (data) {
+                        $("#myClock").html(data);
+                    }
+                });
+            }
+
+            //cứ 1 giây gọi hàm layGio 1 lần
+            setInterval(layGio, 1000);
+
+            $("#btnRandom").click(function () {
+                $.ajax({
+                    url: "/Ajax/Random",
+                    data: {N: 5},
+                    success: function (data) {
+                        $("#sonn").html(data);
+                    }
+                });
+            });
+        });
+    </script>
+}
+

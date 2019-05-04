@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "Search";
+}
+
+<h2>Search</h2>
+<input placeholder="Search" id="btnKeyword" />
+<div id="result"></div>
+@section Scripts{
+    <script>
+        $(function(){
+            $("#btnKeyword").keyup(function () {
+                $.ajax({
+                    url: "/Ajax/Search",
+                    type:"POST",
+                    data: { keyword: $(this).val() },
+                    success: function (response) {
+                        $("#result").html(response);
+                    }
+                });
+            });
+        });
+    </script>
+}
